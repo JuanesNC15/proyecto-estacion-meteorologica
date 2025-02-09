@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estación Meteorológica - Proyecto ESP32</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --color-primary: #1E90FF; /* Azul claro */
+            --color-secondary: #87CEEB; /* Azul cielo */
+            --color-background: #F0F8FF; /* Fondo claro */
+            --color-text: #333333; /* Texto oscuro */
+            --color-accent: #32CD32; /* Verde para detalles */
+            --color-title: #003366; /* Color oscuro para el título principal */
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--color-primary), var(--color-background));
+            font-family: Arial, sans-serif;
+            color: var(--color-text);
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1, h2, h3 {
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--color-title); /* Color oscuro para el título principal */
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            border-bottom: 2px solid var(--color-accent);
+            padding-bottom: 5px;
+            color: var(--color-primary);
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            color: var(--color-primary);
+        }
+
+        .section {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        a {
+            color: var(--color-primary);
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        a:hover {
+            color: var(--color-accent);
+            text-decoration: underline;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: var(--color-primary);
+            color: white;
+            border-radius: 5px;
+            text-align: center;
+            transition: background-color 0.3s ease;
+        }
+
+        .button:hover {
+            background-color: var(--color-accent);
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            h2 {
+                font-size: 1.5rem;
+            }
+            .section {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1><i class="fas fa-cloud-sun"></i> Estación Meteorológica - Proyecto ESP32</h1>
+        <p>Universidad Distrital Francisco José de Caldas</p>
+        <p>Facultad de Ingeniería</p>
+        <p>Programación Aplicada</p>
+        <p>2024-3</p>
+        <p>Juan Niño, Fabian Enrique Papagayo Masias</p>
+        <p>Bogotá, <span id="fecha-actual"></span></p> <!-- Aquí se mostrará la fecha actual -->
+    </header>
+
+    <section class="section">
+        <h2><i class="fas fa-info-circle"></i> Introducción</h2>
+        <p>
+            La interacción mediante gestos es una tecnología en crecimiento, ofreciendo alternativas innovadoras a los sistemas tradicionales de entrada. Este proyecto tiene como objetivo desarrollar un sistema basado en un ESP32 y un sensor ultrasónico que permita navegar a través de opciones utilizando movimientos de la mano. Además, el sistema estará integrado con una API de clima para mostrar información meteorológica relevante, proporcionando una experiencia interactiva y funcional.
+        </p>
+    </section>
+
+    <section class="section">
+        <h2><i class="fas fa-exclamation-triangle"></i> Descripción del problema</h2>
+        <p>
+            La interacción con dispositivos electrónicos a menudo requiere el uso de interfaces físicas o pantallas táctiles, las cuales pueden ser limitantes en ciertos entornos o para usuarios con necesidades específicas. Problemas detectados:
+        </p>
+        <ul>
+            <li><strong>Limitaciones de accesibilidad:</strong> Dificultad para interactuar con pantallas táctiles o botones.</li>
+            <li><strong>Interacción no intuitiva:</strong> Falta de opciones de control manos libres en dispositivos portátiles.</li>
+            <li><strong>Desconexión de datos en tiempo real:</strong> Poca integración de información externa como el clima.</li>
+        </ul>
+        <p>
+            Este proyecto busca resolver estos problemas mediante el uso de tecnología accesible, interactiva y personalizable.
+        </p>
+    </section>
+
+    <section class="section">
+        <h2><i class="fas fa-bullseye"></i> Objetivos</h2>
+        <h3>Objetivo general</h3>
+        <p>
+            Desarrollar un sistema interactivo basado en el ESP32 que permita la navegación mediante movimientos de la mano detectados por un sensor ultrasónico y que proporcione información meteorológica a través de una API.
+        </p>
+        <h3>Objetivos específicos</h3>
+        <ol>
+            <li>Implementar un sensor ultrasónico para detectar movimientos de la mano y traducirlos en acciones específicas.</li>
+            <li>Diseñar un sistema de navegación por gestos para seleccionar opciones dentro de un menú.</li>
+            <li>Conectar el ESP32 a una API de clima para obtener y mostrar información meteorológica en tiempo real.</li>
+            <li>Diseñar una interfaz de usuario sencilla para la presentación de datos obtenidos.</li>
+            <li>Garantizar que el sistema sea portátil y de bajo costo.</li>
+        </ol>
+    </section>
+
+    <section class="section">
+        <h2><i class="fas fa-tools"></i> Componentes a utilizar</h2>
+        <h3>Hardware:</h3>
+        <ul>
+            <li><strong>ESP32:</strong> Microcontrolador principal para gestionar el procesamiento y la conectividad.</li>
+            <li><strong>Sensor ultrasónico (HC-SR04):</strong> Para detectar la distancia y el movimiento de la mano.</li>
+            <li><strong>Pantalla OLED o LCD:</strong> Para mostrar las opciones del menú y la información del clima.</li>
+            <li><strong>Batería recargable:</strong> Para alimentar el sistema y hacerlo portátil.</li>
+            <li><strong>Módulo Wi-Fi:</strong> Integrado en el ESP32, para conectarse a la API de clima.</li>
+            <li><strong>Carcasa personalizada:</strong> Para proteger y compactar los componentes.</li>
+        </ul>
+        <h3>Software:</h3>
+        <ul>
+            <li><strong>MicroPython o PlatformIO:</strong> Entorno de programación del ESP32.</li>
+            <li><strong>Librerías necesarias:</strong>
+                <ul>
+                    <li>"WiFi.h" y "HTTPClient.h" para conectar y consumir la API.</li>
+                    <li>"Adafruit_SSD1306" o similar para la pantalla.</li>
+                    <li>Lógica para interpretar las mediciones del sensor ultrasónico.</li>
+                </ul>
+            </li>
+        </ul>
+    </section>
+
+    <footer>
+        <p>Proyecto desarrollado por Juan Niño y Fabian Enrique Papagayo Masias</p>
+        <p>Universidad Distrital Francisco José de Caldas - 2024</p>
+        <p><a href="https://github.com/tu-usuario/proyecto-estacion-meteorologica" target="_blank" class="button">Ver código en GitHub</a></p>
+    </footer>
+
+    <script>
+        // Función para obtener la fecha actual en formato "día de mes de año"
+        function obtenerFechaActual() {
+            const fecha = new Date();
+            const opciones = { year: 'numeric', month: 'long', day: 'numeric' };
+            return fecha.toLocaleDateString('es-ES', opciones);
+        }
+
+        // Mostrar la fecha actual en el elemento con id "fecha-actual"
+        document.getElementById('fecha-actual').textContent = obtenerFechaActual();
+    </script>
+
+</body>
+</html>
