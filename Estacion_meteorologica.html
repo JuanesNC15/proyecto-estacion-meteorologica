@@ -97,6 +97,26 @@
             border-radius: 10px;
         }
 
+        .image-container {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+        }
+
+        .image-container img {
+            max-width: 45%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .image-caption {
+            text-align: center;
+            margin-top: 10px;
+            font-size: 0.9rem;
+            color: var(--color-text);
+        }
+
         @media (max-width: 768px) {
             h1 {
                 font-size: 2rem;
@@ -106,6 +126,14 @@
             }
             .section {
                 padding: 15px;
+            }
+            .image-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            .image-container img {
+                max-width: 100%;
+                margin-bottom: 20px;
             }
         }
     </style>
@@ -125,7 +153,11 @@
     <section class="section">
         <h2><i class="fas fa-info-circle"></i> Introducción</h2>
         <p>
-            La interacción mediante gestos es una tecnología en crecimiento, ofreciendo alternativas innovadoras a los sistemas tradicionales de entrada. Este proyecto tiene como objetivo desarrollar un sistema basado en un ESP32 y un sensor ultrasónico que permita navegar a través de opciones utilizando movimientos de la mano. Además, el sistema estará integrado con una API de clima para mostrar información meteorológica relevante, proporcionando una experiencia interactiva y funcional.
+            En un mundo donde el monitoreo y análisis de las condiciones climáticas se han convertido en herramientas clave para la toma de decisiones, tanto a nivel personal como profesional, el diseño de dispositivos electrónicos que permitan acceder a datos en tiempo real resulta de gran relevancia. Este proyecto final tiene como propósito desarrollar un dispositivo compacto y eficiente capaz de medir y mostrar datos climáticos en tiempo real utilizando tecnologías modernas y de bajo costo.
+
+El sistema se basa en el sensor BME280, un módulo altamente preciso y versátil que permite medir temperatura, humedad y presión atmosférica. Estos datos serán procesados por un microcontrolador ESP32, conocido por su capacidad de conexión inalámbrica (Wi-Fi y Bluetooth) y su excelente rendimiento para proyectos IoT. La información recolectada será presentada en una pantalla OLED de 0.96 pulgadas, la cual permite una visualización clara y elegante de los datos en tiempo real.
+
+En resumen, el dispositivo propuesto combina precisión, portabilidad y conectividad, ofreciendo una solución innovadora y práctica para el análisis de las condiciones climáticas en tiempo real.
         </p>
     </section>
 
@@ -152,8 +184,8 @@
         </p>
         <h3>Objetivos específicos</h3>
         <ol>
-            <li>Implementar un sensor ultrasónico para detectar movimientos de la mano y traducirlos en acciones específicas.</li>
-            <li>Diseñar un sistema de navegación por gestos para seleccionar opciones dentro de un menú.</li>
+            <li>Implementar un sensor para aplicaciones de monitoreo climático, estaciones meteorológicas o sistemas de control ambiental.</li>
+            <li>Diseñar un sistema de navegación para seleccionar opciones dentro de un menú.</li>
             <li>Conectar el ESP32 a una API de clima para obtener y mostrar información meteorológica en tiempo real.</li>
             <li>Diseñar una interfaz de usuario sencilla para la presentación de datos obtenidos.</li>
             <li>Garantizar que el sistema sea portátil y de bajo costo.</li>
@@ -165,7 +197,7 @@
         <h3>Hardware:</h3>
         <ul>
             <li><strong>ESP32:</strong> Microcontrolador principal para gestionar el procesamiento y la conectividad.</li>
-            <li><strong>Sensor ultrasónico (HC-SR04):</strong> Para detectar la distancia y el movimiento de la mano.</li>
+            <li><strong>Sensor (BME280):</strong> Para medir la temperatura, humedad y presion atmosferica.</li>
             <li><strong>Pantalla OLED o LCD:</strong> Para mostrar las opciones del menú y la información del clima.</li>
             <li><strong>Batería recargable:</strong> Para alimentar el sistema y hacerlo portátil.</li>
             <li><strong>Módulo Wi-Fi:</strong> Integrado en el ESP32, para conectarse a la API de clima.</li>
@@ -183,8 +215,46 @@
             </li>
         </ul>
     </section>
-    <img src="https://juanesnc15.github.io/proyecto-estacion-meteorologica/Wokwi%20estm.jpg" alt="Diagrama del sistema de la estación meteorológica" width="500" height="300" >
-    <img src="https://juanesnc15.github.io/proyecto-estacion-meteorologica/estmt.jpeg" alt="Diagrama del sistema de la estación meteorológica" width="500" height="300">
+
+    <section class="section">
+        <h2><i class="fas fa-images"></i> Comparación de Diseño Inicial vs. Resultado Final</h2>
+        <div class="image-container">
+            <div>
+                <img src="https://juanesnc15.github.io/proyecto-estacion-meteorologica/Wokwi%20estm.jpg" alt="Diseño Inicial" width="1000" height="600">
+                <div class="image-caption">Diseño Inicial</div>
+            </div>
+            <div>
+                <img src="https://juanesnc15.github.io/proyecto-estacion-meteorologica/estmt.jpeg" alt="Resultado Final" width="1000" height="600">
+                <div class="image-caption">Resultado Final</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2><i class="fas fa-dollar-sign"></i> Costos y tiempo de realización</h2>
+        <p>
+            A continuación se detallan los costos aproximados de los componentes utilizados en el proyecto y el tiempo estimado para su realización:
+        </p>
+        <h3>Costos:</h3>
+        <ul>
+            <li><strong>ESP32:</strong> $50,000 COP</li>
+            <li><strong>Sensor BME280:</strong> $35,000 COP</li>
+            <li><strong>Pantalla OLED 0.96":</strong> $22,000 COP</li>
+            <li><strong>Carcasa personalizada:</strong> $5,000 COP</li>
+            <li><strong>Cables y conectores:</strong> $10,000 COP</li>
+        </ul>
+        <p><strong>Costo total aproximado:</strong> $122,000 COP</p>
+        <h3>Tiempo de realización:</h3>
+        <p>
+            El tiempo estimado para la realización del proyecto es de aproximadamente <strong>3 semanas</strong>, distribuidas de la siguiente manera:
+        </p>
+        <ul>
+            <li><strong>Investigación y planificación:</strong> 1 semana</li>
+            <li><strong>Adquisición de componentes:</strong> 2 días</li>
+            <li><strong>Montaje y programación:</strong> 1 semana</li>
+            <li><strong>Pruebas y ajustes:</strong> 5 días</li>
+        </ul>
+    </section>
 
     <footer>
         <p>Proyecto desarrollado por Juan Esteban Niño Cañón y Fabian Enrique Papagayo Masias</p>
